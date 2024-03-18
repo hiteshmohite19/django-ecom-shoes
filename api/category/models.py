@@ -2,19 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-colors = (
-    ("black", "Black"),
-    ("white", "White"),
-    ("blue", "Blue"),
-    ("red", "Red"),
-    ("green", "Green"),
-    ("grey", "Grey"),
-    ("cream", "Cream"),
-    ("brown", "Brown"),
-    ("pink", "Pink"),
-    ("yellow", "Yellow"),
-)
-
 
 class Brands(models.Model):
     id = models.BigAutoField(primary_key=True, editable=False)
@@ -50,7 +37,7 @@ class Gender(models.Model):
 
 class Color(models.Model):
     id = models.BigAutoField(primary_key=True, editable=False)
-    color = models.CharField(choices=colors, blank=False)
+    color = models.CharField(blank=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

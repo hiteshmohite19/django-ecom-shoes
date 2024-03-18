@@ -6,7 +6,7 @@ from api.category.models import *
 
 class Product(models.Model):
     id = models.BigAutoField(primary_key=True, editable=False)
-    name = models.CharField(max_length=100, unique=True, blank=False)
+    name = models.CharField(unique=True, blank=False)
     description = models.TextField(blank=False)
     size_quantity = models.JSONField()
     price=models.DecimalField(decimal_places=2,blank=False, max_digits=10, default=499.00)

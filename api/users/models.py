@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.base_user import BaseUserManager
 from api.models import PincodeCityState
+
 # Create your models here.
 
 
@@ -29,8 +31,9 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             **kwargs,
         )
-        user.set_password(password)
-        user.save()
+        user.set_password(make_password(password))
+        print(user)
+        user.save(using=self._db)
         return user
 
 
@@ -60,7 +63,9 @@ class UserAddress(models.Model):
     address1 = models.CharField(max_length=200, null=False, blank=False)
     address2 = models.CharField(max_length=200, null=False, blank=False)
     address3 = models.CharField(max_length=200, null=True, blank=True)
-    pincode_details = models.ForeignKey(PincodeCityState, on_delete=models.PROTECT, blank=False, default='000000')
+    pincode_details = models.ForeignKey(
+        PincodeCityState, on_delete=models.PROTECT, blank=False, default="000000"
+    )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
